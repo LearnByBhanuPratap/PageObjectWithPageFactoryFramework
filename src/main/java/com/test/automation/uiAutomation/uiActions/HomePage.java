@@ -1,6 +1,7 @@
 package com.test.automation.uiAutomation.uiActions;
 
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -83,24 +84,28 @@ public class HomePage extends TestBase{
 		signUpLink.click();
 		log.info("clicked on sign Up link and object is:-"+signUpLink.toString());
 		this.firstName.clear();
-		this.firstName.sendKeys("test");
+		this.firstName.sendKeys(firstName);
 		log.info("entered data to first name field and object is:-"+this.firstName.toString());
 		this.lastName.clear();
-		this.lastName.sendKeys("testlast");
+		this.lastName.sendKeys(lastName);
 		log.info("entered data to last name field and object is:-"+this.lastName.toString());
 		email.clear();
-		email.sendKeys("automation@gmail.com");
+		email.sendKeys(emailAddress);
 		log.info("entered data to email field and object is:-"+email.toString());
 		createPassword.clear();
-		createPassword.sendKeys("password");
+		createPassword.sendKeys(password);
 		log.info("entered data to password field and object is:-"+createPassword.toString());
 		createAccount.click();
 		log.info("clicked on craete and account and object is:-"+signUpLink.toString());
 	}
 	
-	public String getRegistrationSuccessMessage(){
-		log.info("registratiom message is:-"+registrationMessage.getText());
-		return registrationMessage.getText();
+	public boolean getRegistrationSuccess(){
+		try {
+			driver.findElement(By.xpath(".//*[@id='MainContent']/div/p")).isDisplayed();
+			return true;
+		} catch (Exception e) {
+		   return false;
+		}
 		
 	}
 	
