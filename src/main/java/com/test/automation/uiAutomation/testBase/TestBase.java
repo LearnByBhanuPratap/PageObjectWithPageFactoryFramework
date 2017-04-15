@@ -12,7 +12,7 @@ public class TestBase {
 	public static final Logger log = Logger.getLogger(TestBase.class.getName());
 	
      public WebDriver driver;
-     String url = "http://automationpractice.com/index.php";
+     String url = "file:///Users/bsingh5/Desktop/demoSite.htm";
      String browser = "firefox";
      
      public void init(){
