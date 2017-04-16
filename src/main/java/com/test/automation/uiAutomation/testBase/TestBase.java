@@ -5,8 +5,11 @@ import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.test.automation.uiAutomation.excelReader.Excel_Reader;
 
@@ -57,6 +60,11 @@ public class TestBase {
     	 excel = new Excel_Reader(path);
     	 String[][] data = excel.getDataFromSheet(sheetName, excelName);
     	 return data;
+     }
+     
+     public void waitForElement(int timeOutInSeconds, WebElement element){
+    	 WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
+    	 wait.until(ExpectedConditions.visibilityOf(element));
      }
      
 }

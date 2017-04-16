@@ -65,6 +65,9 @@ public class HomePage extends TestBase{
 	@FindBy(xpath=".//*[@id='customer_login']/p[1]/input")
 	WebElement clickOnSignIn;
 	
+	@FindBy(xpath="//*[@id='customer_logout_link']")
+	WebElement logout;
+	
 	public HomePage(WebDriver driver){
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
@@ -122,6 +125,29 @@ public class HomePage extends TestBase{
 		loginEmail.sendKeys(emailAddress);
 		password.sendKeys(loginPassword);
 		clickOnSignIn.click();
+		driver.switchTo().defaultContent();
+	}
+	
+	public boolean verifyLogoutDisplay(){
+		try {
+			driver.switchTo().frame(homePageIframe);
+			//waitForElement(300, logout);
+			logout.isDisplayed();
+			log.info("logout is dispalyed and object is:-"+logout.toString());
+			driver.switchTo().defaultContent();
+			return true;
+		} catch (Exception e) {
+			driver.switchTo().defaultContent();
+			return false;
+		}
+	}
+	
+	public void clickOnLogout() {
+		driver.switchTo().frame(homePageIframe);
+		//waitForElement(300, logout);
+		logout.click();
+		driver.switchTo().defaultContent();
+		log.info("cliked on logout button and object is:-" + logout.toString());
 	}
 	
 	
