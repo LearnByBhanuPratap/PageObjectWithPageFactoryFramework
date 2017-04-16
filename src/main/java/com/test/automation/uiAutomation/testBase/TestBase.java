@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import com.test.automation.uiAutomation.excelReader.Excel_Reader;
+
 public class TestBase {
 	
 	public static final Logger log = Logger.getLogger(TestBase.class.getName());
@@ -15,6 +17,7 @@ public class TestBase {
      public WebDriver driver;
      String url = "file:///Users/bsingh5/Desktop/demoSite.htm";
      String browser = "firefox";
+     Excel_Reader excel;
      
      public void init(){
     	  selectBrowser(browser);
@@ -48,4 +51,12 @@ public class TestBase {
     	 driver.manage().window().maximize();
     	 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
      }
+     
+     public String[][] getData(String excelName, String sheetName){
+    	 String path = System.getProperty("user.dir")+"/src/main/java/com/test/automation/uiAutomation/data/"+excelName;
+    	 excel = new Excel_Reader(path);
+    	 String[][] data = excel.getDataFromSheet(sheetName, excelName);
+    	 return data;
+     }
+     
 }

@@ -53,6 +53,18 @@ public class HomePage extends TestBase{
 	@FindBy(xpath="//*[@id='shopify-section-header']/div/div[2]/span")
 	WebElement registrationMessage;
 	
+	@FindBy(xpath="//*[@id='customer_login_link']")
+	WebElement loginLink;
+	
+	@FindBy(id="CustomerEmail")
+	WebElement loginEmail;
+	
+	@FindBy(xpath=".//*[@id='CustomerPassword']")
+	WebElement password;
+	
+	@FindBy(xpath=".//*[@id='customer_login']/p[1]/input")
+	WebElement clickOnSignIn;
+	
 	public HomePage(WebDriver driver){
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
@@ -73,11 +85,7 @@ public class HomePage extends TestBase{
 		log.info("erorr message is:-"+authenticationFailed.getText());
 		return authenticationFailed.getText();
 	}
-	
-	public void loginToDemoSite(){
-		
-	}
-	
+
 	public void registorUser(String firstName, String lastName, String emailAddress, String password){
 		driver.switchTo().frame(homePageIframe);
 		log.info("swithing to homepage frame and frame object is:-"+homePageIframe.toString());
@@ -106,7 +114,14 @@ public class HomePage extends TestBase{
 		} catch (Exception e) {
 		   return false;
 		}
-		
+	}
+	
+	public void loginToDemoSite(String emailAddress,String loginPassword){
+		driver.switchTo().frame(homePageIframe);
+		loginLink.click();
+		loginEmail.sendKeys(emailAddress);
+		password.sendKeys(loginPassword);
+		clickOnSignIn.click();
 	}
 	
 	
