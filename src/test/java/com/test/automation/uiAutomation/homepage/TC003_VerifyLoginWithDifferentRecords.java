@@ -32,6 +32,7 @@ public class TC003_VerifyLoginWithDifferentRecords extends TestBase{
 
 	@Test(dataProvider="loginData")
 	public void testLogin(String emailAddress, String loginPassword, String runMode) {
+		
 		if(runMode.equalsIgnoreCase("n")){
 			throw new SkipException("user marked this record as no run");
 		}
@@ -39,6 +40,7 @@ public class TC003_VerifyLoginWithDifferentRecords extends TestBase{
 		homapage = new HomePage(driver);
 		homapage.loginToDemoSite(emailAddress, loginPassword);
 		boolean status = homapage.verifyLogoutDisplay();
+		getScreenShot("testLogin_"+emailAddress);
 		if(status){
 			homapage.clickOnLogout();
 		}
