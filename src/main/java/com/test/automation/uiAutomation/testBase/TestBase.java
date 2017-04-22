@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
@@ -109,6 +111,12 @@ public class TestBase {
 	public void closeBrowser(){
 		driver.quit();
 		log.info("browser closed");
+	}
+	
+	public Iterator<String> getAllWindows(){
+		Set<String> windows = driver.getWindowHandles();
+		Iterator<String> itr = windows.iterator();
+		return itr;
 	}
 	
 	/*
