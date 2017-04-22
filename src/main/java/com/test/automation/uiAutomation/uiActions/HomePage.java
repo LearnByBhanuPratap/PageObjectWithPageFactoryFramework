@@ -11,7 +11,15 @@ import com.test.automation.uiAutomation.testBase.TestBase;
 
 public class HomePage extends TestBase{
 	
+	public final String mens = "Mens";
+	public final String womens = "Womens";
+	public final String blog = "Blog";
+	
+	public final String jackets = "Jackets";
+	public final String pants = "Pants";
+	
 	public static final Logger log = Logger.getLogger(HomePage.class.getName());
+	
 	WebDriver driver;
 	
 	@FindBy(xpath="//*[@id='header']/div[2]/div/div/nav/div[1]/a")
@@ -151,16 +159,29 @@ public class HomePage extends TestBase{
 	}
 	
 	public void clickOnNavigationMenu(String menuName){
-		driver.findElement(By.xpath("//button[contains(text(),'"+menuName+"') and @aria-expanded='false'])")).click();
+		driver.findElement(By.xpath("//button[contains(text(),'"+menuName+"') and @aria-expanded='false']")).click();
 		log.info("clicked on:-"+menuName+" navigation menu");
 	}
 	
 	public void clickOnProductInMensSection(String product){
+		waitForElement(80, driver.findElement(By.xpath(".//button[contains(text(),'Mens') and @aria-expanded='true']/following-sibling::ul/child::li/child::a[contains(text(),'"+product+"')]")));
 		driver.findElement(By.xpath(".//button[contains(text(),'Mens') and @aria-expanded='true']/following-sibling::ul/child::li/child::a[contains(text(),'"+product+"')]")).click();
+		log.info("clicked on:-"+product);
 	}
 	
 	public void clickOnProductInWomensSection(String product){
+		waitForElement(80, driver.findElement(By.xpath(".//button[contains(text(),'Womens') and @aria-expanded='true']/following-sibling::ul/child::li/child::a[contains(text(),'"+product+"')]")));
 		driver.findElement(By.xpath(".//button[contains(text(),'Womens') and @aria-expanded='true']/following-sibling::ul/child::li/child::a[contains(text(),'"+product+"')]")).click();
+	}
+	
+	public void switchToFrame(){
+		driver.switchTo().frame(homePageIframe);
+		log.info("switched to the iframe");
+	}
+	
+	public void switchToDefaultContent(){
+		driver.switchTo().defaultContent();
+		log.info("switched to the default Content");
 	}
 	
 }

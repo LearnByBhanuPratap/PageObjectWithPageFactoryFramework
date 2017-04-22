@@ -106,6 +106,11 @@ public class TestBase {
 		js.executeScript("arguments[0].style.border=''", element);
 	}
 	
+	public void closeBrowser(){
+		driver.quit();
+		log.info("browser closed");
+	}
+	
 	/*
 	 .//button[contains(text(),'Womens') and @aria-expanded='false']
 
