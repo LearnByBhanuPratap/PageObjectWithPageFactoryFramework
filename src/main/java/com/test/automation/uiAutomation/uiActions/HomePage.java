@@ -150,5 +150,17 @@ public class HomePage extends TestBase{
 		log.info("cliked on logout button and object is:-" + logout.toString());
 	}
 	
+	public void clickOnNavigationMenu(String menuName){
+		driver.findElement(By.xpath("//button[contains(text(),'"+menuName+"') and @aria-expanded='false'])")).click();
+		log.info("clicked on:-"+menuName+" navigation menu");
+	}
+	
+	public void clickOnProductInMensSection(String product){
+		driver.findElement(By.xpath(".//button[contains(text(),'Mens') and @aria-expanded='true']/following-sibling::ul/child::li/child::a[contains(text(),'"+product+"')]")).click();
+	}
+	
+	public void clickOnProductInWomensSection(String product){
+		driver.findElement(By.xpath(".//button[contains(text(),'Womens') and @aria-expanded='true']/following-sibling::ul/child::li/child::a[contains(text(),'"+product+"')]")).click();
+	}
 	
 }

@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -19,19 +20,22 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 
+import com.test.automation.uiAutomation.customListner.Listener;
 import com.test.automation.uiAutomation.excelReader.Excel_Reader;
 
 public class TestBase {
 	
 	public static final Logger log = Logger.getLogger(TestBase.class.getName());
 	
-     public WebDriver driver;
+     public static WebDriver driver;
      String url = "file:///Users/bsingh5/Desktop/demoSite.htm";
      String browser = "firefox";
      Excel_Reader excel;
+     Listener lis;
      
      public void init(){
     	  selectBrowser(browser);
+    	  //lis = new Listener(driver);
     	  getUrl(url);
     	  String log4jConfPath = "log4j.properties";
     	  PropertyConfigurator.configure(log4jConfPath);
@@ -92,5 +96,30 @@ public class TestBase {
  				e.printStackTrace();
  			}
  		}
-     }
+     
+	public static void highlightMe(WebDriver driver, WebElement element) throws InterruptedException {
+		// Creating JavaScriptExecuter Interface
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		// Execute javascript
+		js.executeScript("arguments[0].style.border='4px solid yellow'", element);
+		Thread.sleep(3000);
+		js.executeScript("arguments[0].style.border=''", element);
+	}
+	
+	/*
+	 .//button[contains(text(),'Womens') and @aria-expanded='false']
+
+.//button[contains(text(),'Mens') and @aria-expanded='false']
+
+
+.//button[contains(text(),'Mens') and @aria-expanded='false']/following-siblings:://a[contains(text(),'Shirts')]
+
+.//button[contains(text(),'Mens') and @aria-expanded='false']/following-sibling::ul/child::a[contains(text(),'Shirts')]
+
+
+
+.//button[contains(text(),'Mens') and @aria-expanded='true']//following-sibling::ul/child::li/child::a[contains(text(),'Shirts')]
+
+	 */
+  }
 

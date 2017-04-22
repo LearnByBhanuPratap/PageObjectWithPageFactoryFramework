@@ -13,7 +13,8 @@ public class TC002_VerifyRegistration extends TestBase {
 	HomePage homepage;
 	String firstName = "test";
 	String lastName = "lastTest";
-	String emailAddress = "automation@gmail.com";
+	//String emailAddress = "automation@gmail.com";
+	String emailAddress = System.currentTimeMillis()+"@gmail.com";
 	String password = "password";
 
 	@BeforeClass
@@ -22,11 +23,11 @@ public class TC002_VerifyRegistration extends TestBase {
 	}
 
 	@Test
-	public void testLogin() {
+	public void verifyRegistration() {
 
 		homepage = new HomePage(driver);
+		System.out.println(emailAddress);
 		homepage.registorUser(firstName, lastName, emailAddress, password);
-		homepage.getRegistrationSuccess();
 		Assert.assertEquals(true, homepage.getRegistrationSuccess());
 
 	}
