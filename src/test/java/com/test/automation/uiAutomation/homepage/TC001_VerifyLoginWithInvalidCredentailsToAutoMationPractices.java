@@ -9,11 +9,11 @@ import org.testng.annotations.Test;
 import com.test.automation.uiAutomation.testBase.TestBase;
 import com.test.automation.uiAutomation.uiActions.HomePage;
 
-public class TC001_VerifyLoginWithInvalidCredentails extends TestBase{
+public class TC001_VerifyLoginWithInvalidCredentailsToAutoMationPractices extends TestBase{
 	
-	public static final Logger log = Logger.getLogger(TC001_VerifyLoginWithInvalidCredentails.class.getName());	
+	public static final Logger log = Logger.getLogger(TC001_VerifyLoginWithInvalidCredentailsToAutoMationPractices.class.getName());	
 
-	HomePage homapage;
+	HomePage homeapage;
 	
 	@BeforeTest
 	public void setUp(){
@@ -24,9 +24,9 @@ public class TC001_VerifyLoginWithInvalidCredentails extends TestBase{
 	@Test
 	public void verifyLoginWithInvalidCredentails(){
 		log.info("=========== Starting verifyLoginWithInvalidCredentails Test=============");
-		homapage = new HomePage(driver);
-		homapage.loginToApplication("test@gmail.com", "password123");
-		Assert.assertEquals(homapage.getInvalidLoginText(), "Authentication failed.");
+		homeapage = new HomePage(driver);
+		homeapage.loginToApplication("test@gmail.com", "password123");
+		Assert.assertEquals(homeapage.getInvalidLoginText(), "Authentication failed.");
 		log.info("=========== Finished verifyLoginWithInvalidCredentails Test=============");
 	}
 	

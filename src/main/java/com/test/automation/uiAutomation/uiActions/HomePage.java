@@ -6,10 +6,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import com.test.automation.uiAutomation.testBase.TestBase;
 
-public class HomePage extends TestBase{
+public class HomePage {
 	
 	public final String mens = "Mens";
 	public final String womens = "Womens";
@@ -19,6 +18,8 @@ public class HomePage extends TestBase{
 	public final String pants = "Pants";
 	
 	public static final Logger log = Logger.getLogger(HomePage.class.getName());
+	
+	TestBase testBase;
 	
 	WebDriver driver;
 	
@@ -49,7 +50,7 @@ public class HomePage extends TestBase{
 	@FindBy(id="LastName")
 	WebElement lastName;
 	
-	@FindBy(id="Email")
+	@FindBy(id="Email12")
 	WebElement email;
 	
 	@FindBy(id="CreatePassword")
@@ -78,6 +79,7 @@ public class HomePage extends TestBase{
 	
 	public HomePage(WebDriver driver){
 		this.driver = driver;
+		testBase = new TestBase();
 		PageFactory.initElements(driver, this);
 	}
 	
@@ -98,8 +100,6 @@ public class HomePage extends TestBase{
 	}
 
 	public void registorUser(String firstName, String lastName, String emailAddress, String password){
-		driver.switchTo().frame(homePageIframe);
-		log.info("swithing to homepage frame and frame object is:-"+homePageIframe.toString());
 		signUpLink.click();
 		log.info("clicked on sign Up link and object is:-"+signUpLink.toString());
 		this.firstName.clear();
@@ -128,7 +128,6 @@ public class HomePage extends TestBase{
 	}
 	
 	public void loginToDemoSite(String emailAddress,String loginPassword){
-		driver.switchTo().frame(homePageIframe);
 		loginLink.click();
 		loginEmail.sendKeys(emailAddress);
 		password.sendKeys(loginPassword);
@@ -138,8 +137,6 @@ public class HomePage extends TestBase{
 	
 	public boolean verifyLogoutDisplay(){
 		try {
-			driver.switchTo().frame(homePageIframe);
-			//waitForElement(300, logout);
 			logout.isDisplayed();
 			log.info("logout is dispalyed and object is:-"+logout.toString());
 			driver.switchTo().defaultContent();
@@ -151,8 +148,6 @@ public class HomePage extends TestBase{
 	}
 	
 	public void clickOnLogout() {
-		driver.switchTo().frame(homePageIframe);
-		//waitForElement(300, logout);
 		logout.click();
 		driver.switchTo().defaultContent();
 		log.info("cliked on logout button and object is:-" + logout.toString());
@@ -164,13 +159,14 @@ public class HomePage extends TestBase{
 	}
 	
 	public void clickOnProductInMensSection(String product){
-		waitForElement(80, driver.findElement(By.xpath(".//button[contains(text(),'Mens') and @aria-expanded='true']/following-sibling::ul/child::li/child::a[contains(text(),'"+product+"')]")));
+		
+		testBase.waitForElement(driver, 80, driver.findElement(By.xpath(".//button[contains(text(),'Mens') and @aria-expanded='true']/following-sibling::ul/child::li/child::a[contains(text(),'"+product+"')]")));
 		driver.findElement(By.xpath(".//button[contains(text(),'Mens') and @aria-expanded='true']/following-sibling::ul/child::li/child::a[contains(text(),'"+product+"')]")).click();
 		log.info("clicked on:-"+product);
 	}
 	
 	public void clickOnProductInWomensSection(String product){
-		waitForElement(80, driver.findElement(By.xpath(".//button[contains(text(),'Womens') and @aria-expanded='true']/following-sibling::ul/child::li/child::a[contains(text(),'"+product+"')]")));
+		testBase.waitForElement(driver, 80, driver.findElement(By.xpath(".//button[contains(text(),'Womens') and @aria-expanded='true']/following-sibling::ul/child::li/child::a[contains(text(),'"+product+"')]")));
 		driver.findElement(By.xpath(".//button[contains(text(),'Womens') and @aria-expanded='true']/following-sibling::ul/child::li/child::a[contains(text(),'"+product+"')]")).click();
 	}
 	

@@ -16,22 +16,17 @@ import org.testng.Reporter;
 
 import com.test.automation.uiAutomation.testBase.TestBase;
 
-public class Listener extends TestBase implements ITestListener{
-	
-	/*
-	WebDriver driver;
-	
-	public Listener(WebDriver driver){
-		this.driver = driver;
-	}
-*/
+public class Listener implements ITestListener{
+
+   WebDriver driver;
+   
 	public void onFinish(ITestContext arg0) {
 		Reporter.log("Test is finished:" + ((ITestResult) arg0).getMethod().getMethodName());
 		
 	}
 
 	public void onStart(ITestContext arg0) {
-		// TODO Auto-generated method stub
+		System.out.println("starting test:"+ arg0.getName());
 		
 	}
 
@@ -41,13 +36,13 @@ public class Listener extends TestBase implements ITestListener{
 	}
 
 	public void onTestFailure(ITestResult result) {
-	
-		Calendar calendar = Calendar.getInstance();
-		SimpleDateFormat formater = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
-		
-		String methodName = result.getName();
-		
-		if (!result.isSuccess()) {
+		driver = TestBase.getDriver();
+		if(!result.isSuccess()){
+			//getScreenShot(result, "failure_screenshots");
+			Calendar calendar = Calendar.getInstance();
+			SimpleDateFormat formater = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
+			
+			String methodName = result.getName();
 
 			File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 			try {
@@ -61,8 +56,10 @@ public class Listener extends TestBase implements ITestListener{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}	
+		}
+		
 	}
+
 
 	public void onTestSkipped(ITestResult arg0) {
 		Reporter.log("Test is skipped:" + arg0.getMethod().getMethodName());
@@ -75,26 +72,8 @@ public class Listener extends TestBase implements ITestListener{
 	}
 
 	public void onTestSuccess(ITestResult arg0) {
-		
-		Calendar calendar = Calendar.getInstance();
-		SimpleDateFormat formater = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
-		
-		String methodName = arg0.getName();
-		Reporter.log("Test is success:" + arg0.getMethod().getMethodName());
-		if (arg0.isSuccess()) {
-
-			File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-			try {
-				String reportDirectory = new File(System.getProperty("user.dir")).getAbsolutePath() + "/src/main/java/com/test/automation/uiAutomation/";
-				File destFile = new File((String) reportDirectory + "/success_screenshots/" + methodName + "_" + formater.format(calendar.getTime()) + ".png");
-				
-				FileUtils.copyFile(scrFile, destFile);
-				
-				Reporter.log("<a href='" + destFile.getAbsolutePath() + "'> <img src='" + destFile.getAbsolutePath() + "' height='100' width='100'/> </a>");
-				
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		if(arg0.isSuccess()){
+			//getScreenShot(arg0, "sucess_screenshots");	
 		}
 		
 	}

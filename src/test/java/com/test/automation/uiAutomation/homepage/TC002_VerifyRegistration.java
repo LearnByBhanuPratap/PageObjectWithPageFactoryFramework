@@ -24,12 +24,13 @@ public class TC002_VerifyRegistration extends TestBase {
 
 	@Test
 	public void verifyRegistration() {
-
+       log.info("=======started verifyRegistration Test===========");
 		homepage = new HomePage(driver);
 		System.out.println(emailAddress);
+		homepage.switchToFrame();
 		homepage.registorUser(firstName, lastName, emailAddress, password);
 		Assert.assertEquals(true, homepage.getRegistrationSuccess());
-
+		log.info("=======finished verifyRegistration Test===========");
 	}
 
 	@AfterClass

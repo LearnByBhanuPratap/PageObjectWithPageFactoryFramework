@@ -16,7 +16,7 @@ public class TC003_VerifyLoginWithDifferentRecords extends TestBase{
 
 	public static final Logger log = Logger.getLogger(TC003_VerifyLoginWithDifferentRecords.class.getName());	
 
-	HomePage homapage;
+	HomePage homepage;
 
 	@DataProvider(name="loginData")
 	public String[][] getTestData(){
@@ -37,12 +37,13 @@ public class TC003_VerifyLoginWithDifferentRecords extends TestBase{
 			throw new SkipException("user marked this record as no run");
 		}
 		log.info("============= Strting VerifyLoginWithDifferentRecords Test===========");
-		homapage = new HomePage(driver);
-		homapage.loginToDemoSite(emailAddress, loginPassword);
-		boolean status = homapage.verifyLogoutDisplay();
+		homepage = new HomePage(driver);
+		homepage.switchToFrame();
+		homepage.loginToDemoSite(emailAddress, loginPassword);
+		boolean status = homepage.verifyLogoutDisplay();
 		getScreenShot("testLogin_"+emailAddress);
 		if(status){
-			homapage.clickOnLogout();
+			homepage.clickOnLogout();
 		}
 		Assert.assertEquals(status, true);
 		log.info("============= Finished VerifyLoginWithDifferentRecords Test===========");

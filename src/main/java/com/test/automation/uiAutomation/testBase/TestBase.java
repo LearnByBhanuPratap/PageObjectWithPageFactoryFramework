@@ -18,26 +18,42 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.ITestResult;
 import org.testng.Reporter;
 
 import com.test.automation.uiAutomation.customListner.Listener;
+import com.test.automation.uiAutomation.customListner.WebEventListener;
 import com.test.automation.uiAutomation.excelReader.Excel_Reader;
 
 public class TestBase {
 	
 	public static final Logger log = Logger.getLogger(TestBase.class.getName());
 	
-     public static WebDriver driver;
+     public WebDriver dr;
      String url = "file:///Users/bsingh5/Desktop/demoSite.htm";
      String browser = "firefox";
      Excel_Reader excel;
-     Listener lis;
+     public EventFiringWebDriver eventdriver;
+     public static EventFiringWebDriver driver;
+     public WebEventListener eventListener;
+     
+     
+     public static EventFiringWebDriver getDriver() {
+		return driver;
+	}
+
+
+	public void setDriver(EventFiringWebDriver driver) {
+		TestBase.driver = driver;
+	}
+
+
      
      public void init(){
     	  selectBrowser(browser);
-    	  //lis = new Listener(driver);
     	  getUrl(url);
     	  String log4jConfPath = "log4j.properties";
     	  PropertyConfigurator.configure(log4jConfPath);
@@ -45,12 +61,18 @@ public class TestBase {
 	
 	
      public void selectBrowser(String browser){
+		
 		if(browser.equalsIgnoreCase("firefox")){
 			//https://github.com/mozilla/geckodriver/releasess
 			// For Mac os
 			System.setProperty("webdriver.firefox.marionette", System.getProperty("user.dir") + "/drivers/geckodriver");
 			log.info("creating object of "+browser);
-			driver = new FirefoxDriver();
+			dr = new FirefoxDriver();
+			driver = new EventFiringWebDriver(dr);
+			eventListener = new WebEventListener();
+			driver.register(eventListener);
+			setDriver(driver);
+			
 			//For Window
 			//System.setProperty("webdriver.gecko.driver ", System.getProperty("user.dir") + "/drivers/geckodriver.exe");
 		}
@@ -58,7 +80,7 @@ public class TestBase {
 			//https://sites.google.com/a/chromium.org/chromedriver/downloads
 			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/drivers/chromedriver");
 			//System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/drivers/chromedriver.exe");
-			driver = new ChromeDriver();
+			//driver = new ChromeDriver();
 		}
 	}
      
@@ -76,7 +98,7 @@ public class TestBase {
     	 return data;
      }
      
-     public void waitForElement(int timeOutInSeconds, WebElement element){
+     public void waitForElement(WebDriver driver, int timeOutInSeconds, WebElement element){
     	 WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
     	 wait.until(ExpectedConditions.visibilityOf(element));
      }
@@ -119,20 +141,45 @@ public class TestBase {
 		return itr;
 	}
 	
-	/*
-	 .//button[contains(text(),'Womens') and @aria-expanded='false']
+	public void getScreenShot(WebDriver driver, ITestResult result, String folderName){
+		Calendar calendar = Calendar.getInstance();
+		SimpleDateFormat formater = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
+		
+		String methodName = result.getName();
 
-.//button[contains(text(),'Mens') and @aria-expanded='false']
+		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		try {
+			String reportDirectory = new File(System.getProperty("user.dir")).getAbsolutePath() + "/src/main/java/com/test/automation/uiAutomation/";
+			File destFile = new File((String) reportDirectory + "/"+folderName+"/" + methodName + "_" + formater.format(calendar.getTime()) + ".png");
+			
+			FileUtils.copyFile(scrFile, destFile);
+			
+			Reporter.log("<a href='" + destFile.getAbsolutePath() + "'> <img src='" + destFile.getAbsolutePath() + "' height='100' width='100'/> </a>");
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void getScreenShotOnSucess(WebDriver driver, ITestResult result){
+		Calendar calendar = Calendar.getInstance();
+		SimpleDateFormat formater = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
+		
+		String methodName = result.getName();
 
+		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		try {
+			String reportDirectory = new File(System.getProperty("user.dir")).getAbsolutePath() + "/src/main/java/com/test/automation/uiAutomation/";
+			File destFile = new File((String) reportDirectory + "/failure_screenshots/" + methodName + "_" + formater.format(calendar.getTime()) + ".png");
+			
+			FileUtils.copyFile(scrFile, destFile);
+			
+			Reporter.log("<a href='" + destFile.getAbsolutePath() + "'> <img src='" + destFile.getAbsolutePath() + "' height='100' width='100'/> </a>");
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-.//button[contains(text(),'Mens') and @aria-expanded='false']/following-siblings:://a[contains(text(),'Shirts')]
-
-.//button[contains(text(),'Mens') and @aria-expanded='false']/following-sibling::ul/child::a[contains(text(),'Shirts')]
-
-
-
-.//button[contains(text(),'Mens') and @aria-expanded='true']//following-sibling::ul/child::li/child::a[contains(text(),'Shirts')]
-
-	 */
   }
 
