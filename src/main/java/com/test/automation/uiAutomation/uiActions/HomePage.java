@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import com.test.automation.uiAutomation.testBase.TestBase;
 
-public class HomePage {
+public class HomePage extends TestBase{
 	
 	public final String mens = "Mens";
 	public final String womens = "Womens";
@@ -19,7 +19,6 @@ public class HomePage {
 	
 	public static final Logger log = Logger.getLogger(HomePage.class.getName());
 	
-	TestBase testBase;
 	
 	WebDriver driver;
 	
@@ -50,7 +49,7 @@ public class HomePage {
 	@FindBy(id="LastName")
 	WebElement lastName;
 	
-	@FindBy(id="Email12")
+	@FindBy(id="Email")
 	WebElement email;
 	
 	@FindBy(id="CreatePassword")
@@ -79,7 +78,7 @@ public class HomePage {
 	
 	public HomePage(WebDriver driver){
 		this.driver = driver;
-		testBase = new TestBase();
+		//testBase = new TestBase();
 		PageFactory.initElements(driver, this);
 	}
 	
@@ -132,25 +131,20 @@ public class HomePage {
 		loginEmail.sendKeys(emailAddress);
 		password.sendKeys(loginPassword);
 		clickOnSignIn.click();
-		driver.switchTo().defaultContent();
 	}
 	
 	public boolean verifyLogoutDisplay(){
 		try {
 			logout.isDisplayed();
 			log.info("logout is dispalyed and object is:-"+logout.toString());
-			driver.switchTo().defaultContent();
 			return true;
 		} catch (Exception e) {
-			driver.switchTo().defaultContent();
 			return false;
 		}
 	}
 	
 	public void clickOnLogout() {
 		logout.click();
-		driver.switchTo().defaultContent();
-		log.info("cliked on logout button and object is:-" + logout.toString());
 	}
 	
 	public void clickOnNavigationMenu(String menuName){
@@ -160,13 +154,13 @@ public class HomePage {
 	
 	public void clickOnProductInMensSection(String product){
 		
-		testBase.waitForElement(driver, 80, driver.findElement(By.xpath(".//button[contains(text(),'Mens') and @aria-expanded='true']/following-sibling::ul/child::li/child::a[contains(text(),'"+product+"')]")));
+		waitForElement(driver, 80, driver.findElement(By.xpath(".//button[contains(text(),'Mens') and @aria-expanded='true']/following-sibling::ul/child::li/child::a[contains(text(),'"+product+"')]")));
 		driver.findElement(By.xpath(".//button[contains(text(),'Mens') and @aria-expanded='true']/following-sibling::ul/child::li/child::a[contains(text(),'"+product+"')]")).click();
 		log.info("clicked on:-"+product);
 	}
 	
 	public void clickOnProductInWomensSection(String product){
-		testBase.waitForElement(driver, 80, driver.findElement(By.xpath(".//button[contains(text(),'Womens') and @aria-expanded='true']/following-sibling::ul/child::li/child::a[contains(text(),'"+product+"')]")));
+		waitForElement(driver, 80, driver.findElement(By.xpath(".//button[contains(text(),'Womens') and @aria-expanded='true']/following-sibling::ul/child::li/child::a[contains(text(),'"+product+"')]")));
 		driver.findElement(By.xpath(".//button[contains(text(),'Womens') and @aria-expanded='true']/following-sibling::ul/child::li/child::a[contains(text(),'"+product+"')]")).click();
 	}
 	

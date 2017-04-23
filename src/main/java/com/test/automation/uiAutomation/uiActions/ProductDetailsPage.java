@@ -9,7 +9,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class ProductDetailsPage{
+import com.test.automation.uiAutomation.testBase.TestBase;
+
+public class ProductDetailsPage extends TestBase{
 	
 	WebDriver driver;
 	public final static Logger log = Logger.getLogger(ProductDetailsPage.class.getName());

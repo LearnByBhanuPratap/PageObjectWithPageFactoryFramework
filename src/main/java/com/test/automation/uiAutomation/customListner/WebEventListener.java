@@ -38,10 +38,11 @@ public class WebEventListener extends AbstractWebDriverEventListener implements 
 	}
 
 	public void beforeClickOn(WebElement element, WebDriver driver) {
-		log("Trying to click on: " + element.toString());
+		//log("Trying to click on: " + element.toString());
 	}
 
 	public void afterClickOn(WebElement element, WebDriver driver) {
+		
 		log("Clicked on: " + element.toString());
 	}
 
@@ -66,7 +67,7 @@ public class WebEventListener extends AbstractWebDriverEventListener implements 
 	}
 
 	public void beforeFindBy(By by, WebElement element, WebDriver driver) {
-		log("Trying to find Element By : " + by.toString());
+		//log("Trying to find Element By : " + by.toString());
 	}
 
 	public void afterFindBy(By by, WebElement element, WebDriver driver) {
@@ -83,6 +84,7 @@ public class WebEventListener extends AbstractWebDriverEventListener implements 
 
 	public void afterScript(String script, WebDriver driver) {
 		System.out.println("Just after afterScript " + driver);
+
 	}
 
 	public void beforeAlertAccept(WebDriver driver) {

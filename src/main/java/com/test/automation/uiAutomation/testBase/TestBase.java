@@ -37,17 +37,17 @@ public class TestBase {
      String browser = "firefox";
      Excel_Reader excel;
      public EventFiringWebDriver eventdriver;
-     public static EventFiringWebDriver driver;
+     public EventFiringWebDriver driver;
      public WebEventListener eventListener;
      
-     
-     public static EventFiringWebDriver getDriver() {
+
+     public  EventFiringWebDriver getDriver() {
 		return driver;
 	}
 
 
 	public void setDriver(EventFiringWebDriver driver) {
-		TestBase.driver = driver;
+		this.driver = driver;
 	}
 
 
@@ -71,7 +71,7 @@ public class TestBase {
 			driver = new EventFiringWebDriver(dr);
 			eventListener = new WebEventListener();
 			driver.register(eventListener);
-			setDriver(driver);
+			//setDriver(driver);
 			
 			//For Window
 			//System.setProperty("webdriver.gecko.driver ", System.getProperty("user.dir") + "/drivers/geckodriver.exe");
@@ -131,7 +131,7 @@ public class TestBase {
 	}
 	
 	public void closeBrowser(){
-		driver.quit();
+		driver.close();
 		log.info("browser closed");
 	}
 	

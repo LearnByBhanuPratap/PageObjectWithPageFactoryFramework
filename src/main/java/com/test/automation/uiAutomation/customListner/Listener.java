@@ -16,12 +16,12 @@ import org.testng.Reporter;
 
 import com.test.automation.uiAutomation.testBase.TestBase;
 
-public class Listener implements ITestListener{
+public class Listener extends TestBase implements ITestListener{
 
-   WebDriver driver;
+	WebDriver driver;
    
 	public void onFinish(ITestContext arg0) {
-		Reporter.log("Test is finished:" + ((ITestResult) arg0).getMethod().getMethodName());
+		Reporter.log("Test is finished:" + arg0.getName());
 		
 	}
 
@@ -36,7 +36,7 @@ public class Listener implements ITestListener{
 	}
 
 	public void onTestFailure(ITestResult result) {
-		driver = TestBase.getDriver();
+		driver = getDriver();
 		if(!result.isSuccess()){
 			//getScreenShot(result, "failure_screenshots");
 			Calendar calendar = Calendar.getInstance();
@@ -72,10 +72,27 @@ public class Listener implements ITestListener{
 	}
 
 	public void onTestSuccess(ITestResult arg0) {
+		driver = getDriver();
 		if(arg0.isSuccess()){
-			//getScreenShot(arg0, "sucess_screenshots");	
-		}
-		
-	}
+			//getScreenShot(result, "failure_screenshots");
+			Calendar calendar = Calendar.getInstance();
+			SimpleDateFormat formater = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
+			
+			String methodName = arg0.getName();
 
+			File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			try {
+				String reportDirectory = new File(System.getProperty("user.dir")).getAbsolutePath() + "/src/main/java/com/test/automation/uiAutomation/";
+				File destFile = new File((String) reportDirectory + "/failure_screenshots/" + methodName + "_" + formater.format(calendar.getTime()) + ".png");
+				
+				FileUtils.copyFile(scrFile, destFile);
+				
+				Reporter.log("<a href='" + destFile.getAbsolutePath() + "'> <img src='" + destFile.getAbsolutePath() + "' height='100' width='100'/> </a>");
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+}
 }

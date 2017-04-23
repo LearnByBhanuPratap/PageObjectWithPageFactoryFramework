@@ -19,15 +19,20 @@ public class TC001_VerifyAaddToCart extends TestBase{
 
 	@Test
 	public void verifyAaddToCart() {
-		log.info("=======Starting verifyAaddToCart test========");
-		homepage = new  HomePage(driver);
-		homepage.switchToFrame();
-		homepage.clickOnNavigationMenu(homepage.mens);
-		homepage.clickOnProductInMensSection(homepage.jackets);
-		productDetailsPage = new ProductDetailsPage(driver);
-		productDetailsPage.selectProduct(productDetailsPage.contrast_jacket);
-		homepage.switchToDefaultContent();
-		log.info("=======Finished verifyAaddToCart test========");
+		try {
+			log.info("=======Starting verifyAaddToCart test========");
+			homepage = new  HomePage(driver);
+			homepage.switchToFrame();
+			homepage.clickOnNavigationMenu(homepage.mens);
+			homepage.clickOnProductInMensSection(homepage.jackets);
+			productDetailsPage = new ProductDetailsPage(driver);
+			productDetailsPage.selectProduct(productDetailsPage.contrast_jacket);
+			homepage.switchToDefaultContent();
+			log.info("=======Finished verifyAaddToCart test========");
+			getScreenShot("verifyAaddToCart");
+		} catch (Exception e) {
+           getScreenShot("verifyAaddToCart");
+		}
 	}
 
 	@AfterClass

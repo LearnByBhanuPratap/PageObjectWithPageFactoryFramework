@@ -6,7 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class AddToCartPage  {
+import com.test.automation.uiAutomation.testBase.TestBase;
+
+public class AddToCartPage  extends TestBase{
 
 	public final static Logger log = Logger.getLogger(AddToCartPage.class.getName());
 	WebDriver driver;

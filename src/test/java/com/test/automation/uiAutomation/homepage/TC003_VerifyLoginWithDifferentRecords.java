@@ -28,25 +28,30 @@ public class TC003_VerifyLoginWithDifferentRecords extends TestBase{
 	@BeforeClass
 	public void setUp() {
      init();
+     homepage = new HomePage(driver);
 	}
 
 	@Test(dataProvider="loginData")
-	public void testLogin(String emailAddress, String loginPassword, String runMode) {
+	public void verifyLoginWithDifferentRecords(String emailAddress, String loginPassword, String runMode) {
 		
 		if(runMode.equalsIgnoreCase("n")){
 			throw new SkipException("user marked this record as no run");
 		}
-		log.info("============= Strting VerifyLoginWithDifferentRecords Test===========");
-		homepage = new HomePage(driver);
-		homepage.switchToFrame();
-		homepage.loginToDemoSite(emailAddress, loginPassword);
-		boolean status = homepage.verifyLogoutDisplay();
-		getScreenShot("testLogin_"+emailAddress);
-		if(status){
-			homepage.clickOnLogout();
+		try {
+			log.info("============= Strting VerifyLoginWithDifferentRecords Test===========");
+			homepage.switchToFrame();
+			homepage.loginToDemoSite(emailAddress, loginPassword);
+			boolean status = homepage.verifyLogoutDisplay();
+			if(status){
+				homepage.clickOnLogout();
+				homepage.switchToDefaultContent();
+			}
+			Assert.assertEquals(status, true);
+			log.info("============= Finished VerifyLoginWithDifferentRecords Test===========");
+			getScreenShot("verifyLoginWithDifferentRecords");
+		} catch (Exception e) {
+			getScreenShot("verifyLoginWithDifferentRecords");
 		}
-		Assert.assertEquals(status, true);
-		log.info("============= Finished VerifyLoginWithDifferentRecords Test===========");
 	}
 
 	@AfterClass

@@ -13,8 +13,8 @@ public class TC002_VerifyRegistration extends TestBase {
 	HomePage homepage;
 	String firstName = "test";
 	String lastName = "lastTest";
-	//String emailAddress = "automation@gmail.com";
-	String emailAddress = System.currentTimeMillis()+"@gmail.com";
+	// String emailAddress = "automation@gmail.com";
+	String emailAddress = System.currentTimeMillis() + "@gmail.com";
 	String password = "password";
 
 	@BeforeClass
@@ -24,17 +24,23 @@ public class TC002_VerifyRegistration extends TestBase {
 
 	@Test
 	public void verifyRegistration() {
-       log.info("=======started verifyRegistration Test===========");
-		homepage = new HomePage(driver);
-		System.out.println(emailAddress);
-		homepage.switchToFrame();
-		homepage.registorUser(firstName, lastName, emailAddress, password);
-		Assert.assertEquals(true, homepage.getRegistrationSuccess());
-		log.info("=======finished verifyRegistration Test===========");
+		try {
+			log.info("=======started verifyRegistration Test===========");
+			homepage = new HomePage(driver);
+			homepage.switchToFrame();
+			homepage.registorUser(firstName, lastName, emailAddress, password);
+			Assert.assertEquals(true, homepage.getRegistrationSuccess());
+			log.info("=======finished verifyRegistration Test===========");
+			getScreenShot("verifyRegistration");
+		} catch (AssertionError e) {
+			getScreenShot("verifyRegistration");
+		} catch (Exception e) {
+			getScreenShot("verifyRegistration");
+		}
 	}
 
 	@AfterClass
 	public void endTest() {
-		driver.quit();
+		closeBrowser();
 	}
 }
