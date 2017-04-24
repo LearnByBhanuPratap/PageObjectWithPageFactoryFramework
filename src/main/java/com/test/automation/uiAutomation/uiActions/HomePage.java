@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Reporter;
+
 import com.test.automation.uiAutomation.testBase.TestBase;
 
 public class HomePage extends TestBase{
@@ -84,37 +86,38 @@ public class HomePage extends TestBase{
 	
 	public void loginToApplication(String emailAddress, String password){
 		signIn.click();
-		log.info("cliked on sign in and object is:-"+signIn.toString());
+		log("cliked on sign in and object is:-"+signIn.toString());
 		loginEmailAddress.sendKeys(emailAddress);
-		log.info("entered email address:-"+emailAddress+" and object is "+loginEmailAddress.toString());
+		log("entered email address:-"+emailAddress+" and object is "+loginEmailAddress.toString());
 		loginPassword.sendKeys(password);
-		log.info("entered password:-"+password+" and object is "+loginPassword.toString());
+		log("entered password:-"+password+" and object is "+loginPassword.toString());
 		submitButton.click();
-		log.info("clicked on sublit butto and object is:-"+submitButton.toString());
+		log("clicked on sublit butto and object is:-"+submitButton.toString());
 	}
 	
 	public String getInvalidLoginText(){
-		log.info("erorr message is:-"+authenticationFailed.getText());
+		log("erorr message is:-"+authenticationFailed.getText());
 		return authenticationFailed.getText();
 	}
 
 	public void registorUser(String firstName, String lastName, String emailAddress, String password){
 		signUpLink.click();
-		log.info("clicked on sign Up link and object is:-"+signUpLink.toString());
+		log("clicked on sign Up link and object is:-"+signUpLink.toString());
+		
 		this.firstName.clear();
 		this.firstName.sendKeys(firstName);
-		log.info("entered data to first name field and object is:-"+this.firstName.toString());
+		log("entered data to first name field and object is:-"+this.firstName.toString());
 		this.lastName.clear();
 		this.lastName.sendKeys(lastName);
-		log.info("entered data to last name field and object is:-"+this.lastName.toString());
+		log("entered data to last name field and object is:-"+this.lastName.toString());
 		email.clear();
 		email.sendKeys(emailAddress);
-		log.info("entered data to email field and object is:-"+email.toString());
+		log("entered data to email field and object is:-"+email.toString());
 		createPassword.clear();
 		createPassword.sendKeys(password);
-		log.info("entered data to password field and object is:-"+createPassword.toString());
+		log("entered data to password field and object is:-"+createPassword.toString());
 		createAccount.click();
-		log.info("clicked on craete and account and object is:-"+signUpLink.toString());
+		log("clicked on craete and account and object is:-"+signUpLink.toString());
 	}
 	
 	public boolean getRegistrationSuccess(){
@@ -136,7 +139,7 @@ public class HomePage extends TestBase{
 	public boolean verifyLogoutDisplay(){
 		try {
 			logout.isDisplayed();
-			log.info("logout is dispalyed and object is:-"+logout.toString());
+			log("logout is dispalyed and object is:-"+logout.toString());
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -149,14 +152,14 @@ public class HomePage extends TestBase{
 	
 	public void clickOnNavigationMenu(String menuName){
 		driver.findElement(By.xpath("//button[contains(text(),'"+menuName+"') and @aria-expanded='false']")).click();
-		log.info("clicked on:-"+menuName+" navigation menu");
+		log("clicked on:-"+menuName+" navigation menu");
 	}
 	
 	public void clickOnProductInMensSection(String product){
 		
 		waitForElement(driver, 80, driver.findElement(By.xpath(".//button[contains(text(),'Mens') and @aria-expanded='true']/following-sibling::ul/child::li/child::a[contains(text(),'"+product+"')]")));
 		driver.findElement(By.xpath(".//button[contains(text(),'Mens') and @aria-expanded='true']/following-sibling::ul/child::li/child::a[contains(text(),'"+product+"')]")).click();
-		log.info("clicked on:-"+product);
+		log("clicked on:-"+product);
 	}
 	
 	public void clickOnProductInWomensSection(String product){
@@ -166,12 +169,17 @@ public class HomePage extends TestBase{
 	
 	public void switchToFrame(){
 		driver.switchTo().frame(homePageIframe);
-		log.info("switched to the iframe");
+		log("switched to the iframe");
 	}
 	
 	public void switchToDefaultContent(){
 		driver.switchTo().defaultContent();
-		log.info("switched to the default Content");
+		log("switched to the default Content");
+	}
+	
+	public void log(String data){
+		log.info(data);
+		Reporter.log(data);
 	}
 	
 }

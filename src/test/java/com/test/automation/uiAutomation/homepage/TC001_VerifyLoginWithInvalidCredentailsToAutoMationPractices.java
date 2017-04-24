@@ -13,7 +13,7 @@ public class TC001_VerifyLoginWithInvalidCredentailsToAutoMationPractices extend
 	
 	public static final Logger log = Logger.getLogger(TC001_VerifyLoginWithInvalidCredentailsToAutoMationPractices.class.getName());	
 
-	HomePage homeapage;
+	HomePage homepage;
 	
 	@BeforeTest
 	public void setUp(){
@@ -23,11 +23,13 @@ public class TC001_VerifyLoginWithInvalidCredentailsToAutoMationPractices extend
 	
 	@Test
 	public void verifyLoginWithInvalidCredentails(){
-		log.info("=========== Starting verifyLoginWithInvalidCredentails Test=============");
-		homeapage = new HomePage(driver);
-		homeapage.loginToApplication("test@gmail.com", "password123");
-		Assert.assertEquals(homeapage.getInvalidLoginText(), "Authentication failed.");
-		log.info("=========== Finished verifyLoginWithInvalidCredentails Test=============");
+		log("=========== Starting verifyLoginWithInvalidCredentails Test=============");
+		homepage = new HomePage(driver);
+		homepage.switchToFrame();
+		homepage.loginToApplication("test@gmail.com", "password123");
+		Assert.assertEquals(homepage.getInvalidLoginText(), "Authentication failed.");
+		log("=========== Finished verifyLoginWithInvalidCredentails Test=============");
+		homepage.switchToDefaultContent();
 	}
 	
 	@AfterClass

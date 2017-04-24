@@ -4,24 +4,15 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 import org.openqa.selenium.support.events.WebDriverEventListener;
-import org.testng.ITestContext;
-import org.testng.ITestListener;
-import org.testng.ITestResult;
 import org.testng.Reporter;
 
-import com.test.automation.uiAutomation.testBase.TestBase;
+public class WebEventListener implements WebDriverEventListener{
 
-public class WebEventListener extends AbstractWebDriverEventListener implements WebDriverEventListener,ITestListener{
-	
-	TestBase testBase;
-	
-   
 	public static final Logger log = Logger.getLogger(WebEventListener.class.getName());
 
 	public void beforeNavigateTo(String url, WebDriver driver) {
-		log("Before navigating to: '" + url + "'");
+		//log("Before navigating to: '" + url + "'");
 	}
 
 	public void afterNavigateTo(String url, WebDriver driver) {
@@ -64,6 +55,7 @@ public class WebEventListener extends AbstractWebDriverEventListener implements 
 
 	public void onException(Throwable error, WebDriver driver) {
 		log("Exception occured: " + error);
+		Reporter.log("Exception occured:" , false);
 	}
 
 	public void beforeFindBy(By by, WebElement element, WebDriver driver) {
@@ -130,47 +122,6 @@ public class WebEventListener extends AbstractWebDriverEventListener implements 
 	public void log(String data){
 		log.info(data);
 		Reporter.log(data);
-	}
-
-	public void onFinish(ITestContext arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void onStart(ITestContext arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void onTestFailedButWithinSuccessPercentage(ITestResult arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void onTestFailure(ITestResult arg0) {
-		testBase = new TestBase();
-		if(!arg0.isSuccess()){
-			testBase.getScreenShot(testBase.driver,arg0, "failure_screenshots");
-		}
-		
-	}
-
-	public void onTestSkipped(ITestResult arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void onTestStart(ITestResult arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void onTestSuccess(ITestResult arg0) {
-		testBase = new TestBase();
-		if(arg0.isSuccess()){
-			testBase.getScreenShot(testBase.driver,arg0, "failure_screenshots");
-		}
-		
 	}
 
 

@@ -36,7 +36,6 @@ public class TestBase {
      String url = "file:///Users/bsingh5/Desktop/demoSite.htm";
      String browser = "firefox";
      Excel_Reader excel;
-     public EventFiringWebDriver eventdriver;
      public EventFiringWebDriver driver;
      public WebEventListener eventListener;
      
@@ -70,7 +69,7 @@ public class TestBase {
 			dr = new FirefoxDriver();
 			driver = new EventFiringWebDriver(dr);
 			eventListener = new WebEventListener();
-			driver.register(eventListener);
+			//driver.register(eventListener);
 			//setDriver(driver);
 			
 			//For Window
@@ -79,8 +78,14 @@ public class TestBase {
 		else if(browser.equalsIgnoreCase("chrome")){
 			//https://sites.google.com/a/chromium.org/chromedriver/downloads
 			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/drivers/chromedriver");
+			// For Windows system
 			//System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/drivers/chromedriver.exe");
 			//driver = new ChromeDriver();
+			log.info("creating object of "+browser);
+			dr = new ChromeDriver();
+			driver = new EventFiringWebDriver(dr);
+			eventListener = new WebEventListener();
+			driver.register(eventListener);
 		}
 	}
      
@@ -131,7 +136,7 @@ public class TestBase {
 	}
 	
 	public void closeBrowser(){
-		driver.close();
+		driver.quit();
 		log.info("browser closed");
 	}
 	
@@ -179,6 +184,11 @@ public class TestBase {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void log(String data){
+		log.info(data);
+		Reporter.log(data);
 	}
 
   }

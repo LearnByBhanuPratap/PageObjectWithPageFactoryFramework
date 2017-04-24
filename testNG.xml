@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Regression Suite" preserve-order="true" parallel="classes" thread-count="3">
+<suite name="Regression Suite" preserve-order="true" parallel="classes" thread-count="1">
 
 <listeners>
 <!-- <listener class-name="com.test.automation.uiAutomation.customListner.Listener"></listener>  -->
@@ -21,7 +21,7 @@
 <test name="AddToCartTest">
 <classes>
 <class name="com.test.automation.uiAutomation.addToCart.TC001_VerifyAaddToCart"></class>
-<class name="com.test.automation.uiAutomation.addToCart.TC002_VerifyFacebookLink"></class>
+<class name="com.test.automation.uiAutomation.addToCart.TC002_VerifyFacebookLink"></class> 
 </classes>
 </test>
 
