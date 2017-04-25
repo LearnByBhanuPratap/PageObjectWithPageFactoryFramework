@@ -1,5 +1,7 @@
 package com.test.automation.uiAutomation.homepage;
 
+import java.io.IOException;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -26,7 +28,7 @@ public class TC003_VerifyLoginWithDifferentRecords extends TestBase{
 	
 
 	@BeforeClass
-	public void setUp() {
+	public void setUp() throws IOException {
      init();
      homepage = new HomePage(driver);
 	}

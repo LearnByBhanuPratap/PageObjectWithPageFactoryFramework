@@ -1,10 +1,12 @@
 package com.test.automation.uiAutomation.testBase;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Iterator;
+import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -24,7 +26,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 
-import com.test.automation.uiAutomation.customListner.Listener;
 import com.test.automation.uiAutomation.customListner.WebEventListener;
 import com.test.automation.uiAutomation.excelReader.Excel_Reader;
 
@@ -33,16 +34,22 @@ public class TestBase {
 	public static final Logger log = Logger.getLogger(TestBase.class.getName());
 	
      public WebDriver dr;
-     String url = "file:///Users/bsingh5/Desktop/demoSite.htm";
-     String browser = "firefox";
      Excel_Reader excel;
      public EventFiringWebDriver driver;
      public WebEventListener eventListener;
+     public Properties OR =  new Properties();;
      
 
      public  EventFiringWebDriver getDriver() {
 		return driver;
 	}
+     
+     public void loadData() throws IOException{
+    	 File file = new  File(System.getProperty("user.dir")+"/src/main/java/com/test/automation/uiAutomation/config/config.properties");
+    	 FileInputStream f = new FileInputStream(file);
+    	 OR.load(f);
+    			 
+     }
 
 
 	public void setDriver(EventFiringWebDriver driver) {
@@ -51,9 +58,11 @@ public class TestBase {
 
 
      
-     public void init(){
-    	  selectBrowser(browser);
-    	  getUrl(url);
+     public void init() throws IOException{
+    	  loadData();
+    	  System.out.println(OR.getProperty("browser"));
+    	  selectBrowser(OR.getProperty("browser"));
+    	  getUrl(OR.getProperty("url"));
     	  String log4jConfPath = "log4j.properties";
     	  PropertyConfigurator.configure(log4jConfPath);
      }

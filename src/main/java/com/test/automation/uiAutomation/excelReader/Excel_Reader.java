@@ -59,6 +59,7 @@ public class Excel_Reader {
 					for (int j = 0; j < totalColumn; j++) {
 						// get Cell method will get cell
 						XSSFCell cell = rows.getCell(j);
+					
 						// If cell of type String , then this if condition will work
 						if (cell.getCellType() == Cell.CELL_TYPE_STRING)
 							dataSets[i - 1][j] = cell.getStringCellValue();

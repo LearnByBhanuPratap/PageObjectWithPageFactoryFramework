@@ -1,5 +1,6 @@
 package com.test.automation.uiAutomation.addToCart;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -21,7 +22,7 @@ public class TC002_VerifyFacebookLink extends TestBase {
 	AddToCartPage addToCart;
 
 	@BeforeClass
-	public void setUp() {
+	public void setUp() throws IOException {
 		init();
 	}
 

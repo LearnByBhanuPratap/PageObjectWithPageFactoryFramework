@@ -1,5 +1,7 @@
 package com.test.automation.uiAutomation.addToCart;
 
+import java.io.IOException;
+
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -12,7 +14,7 @@ public class TC001_VerifyAaddToCart extends TestBase{
 	HomePage homepage;
 	ProductDetailsPage productDetailsPage;
 	@BeforeClass
-	public void setUp() {
+	public void setUp() throws IOException {
       init();
       //org.openqa.selenium.InvalidSelectorException: 
 	}

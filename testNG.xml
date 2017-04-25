@@ -5,11 +5,10 @@
 
 <listeners>
 <!-- <listener class-name="com.test.automation.uiAutomation.customListner.Listener"></listener>  -->
-<!-- <listener class-name="com.test.automation.uiAutomation.customListner.RetryListener"></listener> -->
+<listener class-name="com.test.automation.uiAutomation.customListner.RetryListener"></listener>
 </listeners>
 
 <test name="HomePageTest">
-
 <classes>
 <class name="com.test.automation.uiAutomation.homepage.TC002_VerifyRegistration"></class>
 <class name="com.test.automation.uiAutomation.homepage.TC003_VerifyLoginWithDifferentRecords"></class>

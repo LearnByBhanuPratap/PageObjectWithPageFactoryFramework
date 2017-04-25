@@ -1,5 +1,7 @@
 package com.test.automation.uiAutomation.homepage;
 
+import java.io.IOException;
+
 import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.Reporter;
@@ -21,7 +23,7 @@ public class TC002_VerifyRegistration extends TestBase {
 	String password = "password";
 
 	@BeforeClass
-	public void setUp() {
+	public void setUp() throws IOException {
 		init();
 	}
 
@@ -40,6 +42,7 @@ public class TC002_VerifyRegistration extends TestBase {
 			getScreenShot("verifyRegistration");
 			Assert.assertTrue(false, "verifyRegistration");
 		} catch (Exception e) {
+			log(e.fillInStackTrace().toString());
 			homepage.switchToDefaultContent();
 			getScreenShot("verifyRegistration");
 			Assert.assertTrue(false, "verifyRegistration");
