@@ -60,11 +60,11 @@ public class TestBase {
      
      public void init() throws IOException{
     	  loadData();
+    	  String log4jConfPath = "log4j.properties";
+    	  PropertyConfigurator.configure(log4jConfPath);
     	  System.out.println(OR.getProperty("browser"));
     	  selectBrowser(OR.getProperty("browser"));
     	  getUrl(OR.getProperty("url"));
-    	  String log4jConfPath = "log4j.properties";
-    	  PropertyConfigurator.configure(log4jConfPath);
      }
 	
 	

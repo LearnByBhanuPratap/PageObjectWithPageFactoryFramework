@@ -25,12 +25,12 @@ public class TC001_VerifyLoginWithInvalidCredentailsToAutoMationPractices extend
 	
 	@Test
 	public void verifyLoginWithInvalidCredentails(){
-		log("=========== Starting verifyLoginWithInvalidCredentails Test=============");
+		log.info("=========== Starting verifyLoginWithInvalidCredentails Test=============");
 		homepage = new HomePage(driver);
 		homepage.switchToFrame();
 		homepage.loginToApplication("test@gmail.com", "password123");
 		Assert.assertEquals(homepage.getInvalidLoginText(), "Authentication failed.");
-		log("=========== Finished verifyLoginWithInvalidCredentails Test=============");
+		log.info("=========== Finished verifyLoginWithInvalidCredentails Test=============");
 		homepage.switchToDefaultContent();
 	}
 	
