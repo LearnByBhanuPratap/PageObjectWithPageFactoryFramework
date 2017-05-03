@@ -1,14 +1,11 @@
 package com.test.automation.uiAutomation.homepage;
 
 import java.io.IOException;
-
 import org.apache.log4j.Logger;
 import org.testng.Assert;
-import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import com.test.automation.uiAutomation.testBase.TestBase;
 import com.test.automation.uiAutomation.uiActions.HomePage;
 
@@ -21,6 +18,7 @@ public class TC002_VerifyRegistration extends TestBase {
 	// String emailAddress = "automation@gmail.com";
 	String emailAddress = System.currentTimeMillis() + "@gmail.com";
 	String password = "password";
+		
 
 	@BeforeClass
 	public void setUp() throws IOException {
@@ -30,32 +28,25 @@ public class TC002_VerifyRegistration extends TestBase {
 	@Test
 	public void verifyRegistration() {
 		try {
-			log("=======started verifyRegistration Test===========");
+			log.info("=======started verifyRegistration Test===========");
 			homepage = new HomePage(driver);
 			homepage.switchToFrame();
 			homepage.registorUser(firstName, lastName, emailAddress, password);
-			Assert.assertEquals(true, homepage.getRegistrationSuccess());
-			log("=======finished verifyRegistration Test===========");
+			Assert.assertEquals(false, homepage.getRegistrationSuccess());
+			log.info("=======finished verifyRegistration Test===========");
 			getScreenShot("verifyRegistration");
 		} catch (AssertionError e) {
 			homepage.switchToDefaultContent();
 			getScreenShot("verifyRegistration");
 			Assert.assertTrue(false, "verifyRegistration");
 		} catch (Exception e) {
-			log(e.fillInStackTrace().toString());
+			log.info(e.fillInStackTrace().toString());
 			homepage.switchToDefaultContent();
 			getScreenShot("verifyRegistration");
 			Assert.assertTrue(false, "verifyRegistration");
 		}
 	}
 
-	@AfterClass
-	public void endTest() {
-		closeBrowser();
-	}
 	
-	public void log(String data){
-		log.info(data);
-		Reporter.log(data);
-	}
+	
 }

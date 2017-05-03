@@ -63,9 +63,9 @@ public class TC002_VerifyFacebookLink extends TestBase {
 		}
 	}
 
-	@AfterClass
-	public void endTest() {
-		closeBrowser();
-	}
+//	@AfterClass
+//	public void endTest() {
+//		closeBrowser();
+//	}
 
 }

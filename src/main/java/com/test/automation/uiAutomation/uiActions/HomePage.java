@@ -122,7 +122,7 @@ public class HomePage extends TestBase{
 	
 	public boolean getRegistrationSuccess(){
 		try {
-			driver.findElement(By.xpath(".//*[@id='MainContent']/div/p")).isDisplayed();
+			driver.findElement(By.xpath("//*[@id='MainContent']/div/p")).isDisplayed();
 			return true;
 		} catch (Exception e) {
 		   return false;

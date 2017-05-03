@@ -56,8 +56,8 @@ public class TC003_VerifyLoginWithDifferentRecords extends TestBase{
 		}
 	}
 
-	@AfterClass
-	public void endTest() {
-       driver.close();
-	}
+//	@AfterClass
+//	public void endTest() {
+//       driver.close();
+//	}
 }

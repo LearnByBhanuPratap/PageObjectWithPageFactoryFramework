@@ -3,8 +3,10 @@ package com.test.automation.uiAutomation.testBase;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.Properties;
 import java.util.Set;
@@ -25,7 +27,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 import com.test.automation.uiAutomation.customListner.WebEventListener;
 import com.test.automation.uiAutomation.excelReader.Excel_Reader;
 
@@ -37,12 +45,21 @@ public class TestBase {
      Excel_Reader excel;
      public EventFiringWebDriver driver;
      public WebEventListener eventListener;
-     public Properties OR =  new Properties();;
+     public Properties OR =  new Properties();
+     public static ExtentReports extent;
+ 	 public static ExtentTest test;
+ 	 public ITestResult result;
      
 
      public  EventFiringWebDriver getDriver() {
 		return driver;
 	}
+     
+     static{
+    	 Calendar calendar = Calendar.getInstance();
+  		SimpleDateFormat formater = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
+  		 extent = new ExtentReports(System.getProperty("user.dir") + "/src/main/java/com/test/automation/uiAutomation/report/test"+formater.format(calendar.getTime())+".html", false);
+     }
      
      public void loadData() throws IOException{
     	 File file = new  File(System.getProperty("user.dir")+"/src/main/java/com/test/automation/uiAutomation/config/config.properties");
@@ -60,6 +77,7 @@ public class TestBase {
      
      public void init() throws IOException{
     	  loadData();
+    	 
     	  String log4jConfPath = "log4j.properties";
     	  PropertyConfigurator.configure(log4jConfPath);
     	  System.out.println(OR.getProperty("browser"));
@@ -93,8 +111,8 @@ public class TestBase {
 			log.info("creating object of "+browser);
 			dr = new ChromeDriver();
 			driver = new EventFiringWebDriver(dr);
-			eventListener = new WebEventListener();
-			driver.register(eventListener);
+			//eventListener = new WebEventListener();
+			//driver.register(eventListener);
 		}
 	}
      
@@ -144,10 +162,7 @@ public class TestBase {
 		js.executeScript("arguments[0].style.border=''", element);
 	}
 	
-	public void closeBrowser(){
-		driver.quit();
-		log.info("browser closed");
-	}
+
 	
 	public Iterator<String> getAllWindows(){
 		Set<String> windows = driver.getWindowHandles();
@@ -195,9 +210,73 @@ public class TestBase {
 		}
 	}
 	
+	public String captureScreen(String fileName) {
+		if(fileName==""){
+			fileName="blank";
+		}
+		File destFile = null;
+		Calendar calendar = Calendar.getInstance();
+ 		SimpleDateFormat formater = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
+ 		
+ 			File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+ 			
+ 			try {
+ 				String reportDirectory = new File(System.getProperty("user.dir")).getAbsolutePath() + "/src/main/java/com/test/automation/uiAutomation/screenshot/";
+ 				destFile = new File((String) reportDirectory + fileName + "_" + formater.format(calendar.getTime()) + ".png");
+ 				FileUtils.copyFile(scrFile, destFile);
+ 				// This will help us to link the screen shot in testNG report
+ 				Reporter.log("<a href='" + destFile.getAbsolutePath() + "'> <img src='" + destFile.getAbsolutePath() + "' height='100' width='100'/> </a>");
+ 			} catch (IOException e) {
+ 				e.printStackTrace();
+ 			}
+ 			return destFile.toString();
+	}
+	
 	public void log(String data){
 		log.info(data);
 		Reporter.log(data);
+		test.log(LogStatus.INFO, data);
+	}
+	
+	public void getresult(ITestResult result){
+		if(result.getStatus()==ITestResult.SUCCESS){
+			test.log(LogStatus.PASS,result.getName()+" test is pass");
+		}
+		else if(result.getStatus()==ITestResult.SKIP){
+			test.log(LogStatus.SKIP,result.getName()+" test is skipped and skip reason is:-"+result.getThrowable());
+		}
+		else if(result.getStatus()==ITestResult.FAILURE){
+			test.log(LogStatus.ERROR,result.getName()+" test is failed"+ result.getThrowable());
+			String screen = captureScreen("");
+			test.log(LogStatus.FAIL,test.addScreenCapture(screen));
+		}
+		else if(result.getStatus()==ITestResult.STARTED){
+			test.log(LogStatus.INFO,result.getName()+" test is started");
+		}
+	}
+	
+	@AfterMethod()
+	public void afterMethod(ITestResult result){
+		getresult(result);
+	}
+	
+	@BeforeMethod()
+	public void beforeMethod(Method result){
+		test = extent.startTest(result.getName());
+		test.log(LogStatus.INFO, result.getName()+" test Started");
+	}
+	
+
+	@AfterClass(alwaysRun=true)
+	public void endTest() {
+		closeBrowser();
+	}
+	
+	public void closeBrowser(){
+		driver.quit();
+		log.info("browser closed");
+		extent.endTest(test);
+		extent.flush();
 	}
 
   }

@@ -37,9 +37,9 @@ public class TC001_VerifyAaddToCart extends TestBase{
 		}
 	}
 
-	@AfterClass
-	public void endTest() {
-      closeBrowser();
-	}
+//	@AfterClass
+//	public void endTest() {
+//      closeBrowser();
+//	}
 
 }

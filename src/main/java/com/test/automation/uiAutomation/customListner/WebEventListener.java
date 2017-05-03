@@ -7,7 +7,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 import org.testng.Reporter;
 
-public class WebEventListener implements WebDriverEventListener{
+import com.relevantcodes.extentreports.LogStatus;
+import com.test.automation.uiAutomation.testBase.TestBase;
+
+public class WebEventListener extends TestBase implements WebDriverEventListener{
 
 	public static final Logger log = Logger.getLogger(WebEventListener.class.getName());
 
@@ -16,7 +19,7 @@ public class WebEventListener implements WebDriverEventListener{
 	}
 
 	public void afterNavigateTo(String url, WebDriver driver) {
-		log("Navigated to:'" + url + "'");
+		//log("Navigated to:'" + url + "'");
 	}
 
 	public void beforeChangeValueOf(WebElement element, WebDriver driver) {
@@ -122,6 +125,7 @@ public class WebEventListener implements WebDriverEventListener{
 	public void log(String data){
 		log.info(data);
 		Reporter.log(data);
+		test.log(LogStatus.INFO, data);
 	}
 
 

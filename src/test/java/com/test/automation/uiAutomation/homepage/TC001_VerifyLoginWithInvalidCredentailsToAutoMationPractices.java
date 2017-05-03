@@ -34,9 +34,9 @@ public class TC001_VerifyLoginWithInvalidCredentailsToAutoMationPractices extend
 		homepage.switchToDefaultContent();
 	}
 	
-	@AfterClass
-	public void endTest(){
-		driver.close();
-	}
+//	@AfterClass
+//	public void endTest(){
+//		driver.close();
+//	}
 
 }
