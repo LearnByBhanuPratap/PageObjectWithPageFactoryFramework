@@ -1,12 +1,19 @@
 package com.test.automation.uiAutomation.customListner;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 
-import com.relevantcodes.extentreports.LogStatus;
 import com.test.automation.uiAutomation.testBase.TestBase;
 /**
  * 
@@ -23,7 +30,6 @@ public class Listener extends TestBase implements ITestListener{
 	}
 
 	public void onStart(ITestContext arg0) {
-		//test.log(LogStatus.INFO,"starting test:"+ arg0.getName());
 		
 	}
 
@@ -33,9 +39,7 @@ public class Listener extends TestBase implements ITestListener{
 	}
 
 	public void onTestFailure(ITestResult result) {
-		/*driver = getDriver();
 		if(!result.isSuccess()){
-			//getScreenShot(result, "failure_screenshots");
 			Calendar calendar = Calendar.getInstance();
 			SimpleDateFormat formater = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
 			
@@ -53,7 +57,7 @@ public class Listener extends TestBase implements ITestListener{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}*/
+		}
 		
 	}
 
@@ -64,15 +68,12 @@ public class Listener extends TestBase implements ITestListener{
 	}
 
 	public void onTestStart(ITestResult arg0) {
-		//test.log(LogStatus.INFO,"starting test:"+ arg0.getName());
 		
 	}
 
 	public void onTestSuccess(ITestResult arg0) {
-		//test.log(LogStatus.INFO,"test finished:"+ arg0.getName());
-	/*	driver = getDriver();
+
 		if(arg0.isSuccess()){
-			//getScreenShot(result, "failure_screenshots");
 			Calendar calendar = Calendar.getInstance();
 			SimpleDateFormat formater = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
 			
@@ -91,6 +92,6 @@ public class Listener extends TestBase implements ITestListener{
 				e.printStackTrace();
 			}
 		}
-*/
+
 }
 }
