@@ -9,7 +9,11 @@ import org.testng.Reporter;
 
 import com.relevantcodes.extentreports.LogStatus;
 import com.test.automation.uiAutomation.testBase.TestBase;
-
+/**
+ * 
+ * @author Bhanu Pratap
+ *
+ */
 public class WebEventListener extends TestBase implements WebDriverEventListener{
 
 	public static final Logger log = Logger.getLogger(WebEventListener.class.getName());

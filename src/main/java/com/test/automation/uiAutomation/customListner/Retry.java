@@ -4,7 +4,11 @@ import org.apache.log4j.Logger;
 import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;
 import org.testng.Reporter;
-
+/**
+ * 
+ * @author Bhanu Pratap
+ *
+ */
 public class Retry implements IRetryAnalyzer {
 	public static final Logger log = Logger.getLogger(Retry.class.getName());
 	private int retryCount = 0;

@@ -14,7 +14,11 @@ import com.test.automation.uiAutomation.testBase.TestBase;
 import com.test.automation.uiAutomation.uiActions.AddToCartPage;
 import com.test.automation.uiAutomation.uiActions.HomePage;
 import com.test.automation.uiAutomation.uiActions.ProductDetailsPage;
-
+/**
+ * 
+ * @author Bhanu Pratap
+ *
+ */
 public class TC002_VerifyFacebookLink extends TestBase {
 
 	HomePage homepage;

@@ -37,6 +37,11 @@ import com.relevantcodes.extentreports.LogStatus;
 import com.test.automation.uiAutomation.customListner.WebEventListener;
 import com.test.automation.uiAutomation.excelReader.Excel_Reader;
 
+/**
+ * 
+ * @author Bhanu Pratap
+ *
+ */
 public class TestBase {
 	
 	public static final Logger log = Logger.getLogger(TestBase.class.getName());

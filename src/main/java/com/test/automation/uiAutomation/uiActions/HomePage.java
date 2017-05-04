@@ -9,7 +9,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Reporter;
 
 import com.test.automation.uiAutomation.testBase.TestBase;
-
+/**
+ * 
+ * @author Bhanu Pratap
+ *
+ */
 public class HomePage extends TestBase{
 	
 	public final String mens = "Mens";

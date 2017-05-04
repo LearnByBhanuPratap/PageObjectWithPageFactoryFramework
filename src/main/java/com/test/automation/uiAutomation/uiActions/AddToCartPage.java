@@ -7,7 +7,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.test.automation.uiAutomation.testBase.TestBase;
-
+/**
+ * 
+ * @author Bhanu Pratap
+ *
+ */
 public class AddToCartPage  extends TestBase{
 
 	public final static Logger log = Logger.getLogger(AddToCartPage.class.getName());

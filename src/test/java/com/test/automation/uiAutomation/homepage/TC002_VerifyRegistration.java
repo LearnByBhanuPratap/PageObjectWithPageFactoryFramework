@@ -8,7 +8,11 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import com.test.automation.uiAutomation.testBase.TestBase;
 import com.test.automation.uiAutomation.uiActions.HomePage;
-
+/**
+ * 
+ * @author Bhanu Pratap
+ *
+ */
 public class TC002_VerifyRegistration extends TestBase {
 
 	public static final Logger log = Logger.getLogger(TC002_VerifyRegistration.class.getName());
