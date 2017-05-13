@@ -36,7 +36,7 @@ public class TC002_VerifyRegistration extends TestBase {
 			homepage = new HomePage(driver);
 			homepage.switchToFrame();
 			homepage.registorUser(firstName, lastName, emailAddress, password);
-			Assert.assertEquals(false, homepage.getRegistrationSuccess());
+			Assert.assertEquals(true, homepage.getRegistrationSuccess());
 			log.info("=======finished verifyRegistration Test===========");
 			getScreenShot("verifyRegistration");
 		} catch (AssertionError e) {

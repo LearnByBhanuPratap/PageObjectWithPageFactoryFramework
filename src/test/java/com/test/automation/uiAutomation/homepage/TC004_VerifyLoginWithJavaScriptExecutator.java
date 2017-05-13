@@ -16,7 +16,8 @@ public class TC004_VerifyLoginWithJavaScriptExecutator extends TestBase{
 	public void setUp() throws IOException {
       init();
 	}
-
+	//For Java Script Video
+	//https://www.youtube.com/watch?v=4cr3GG54hVo&list=PL5NG-eEzvTtgd4vj_CWaJgWw2nj5L8SUP&index=6
 	@Test
 	public void testLogin() {
 	homepage = new HomePage(driver);

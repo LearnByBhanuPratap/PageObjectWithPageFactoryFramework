@@ -55,7 +55,7 @@ public class HomePage extends TestBase{
 	@FindBy(id="LastName")
 	WebElement lastName;
 	
-	@FindBy(id="Email12")
+	@FindBy(id="Email")
 	WebElement email;
 	
 	@FindBy(id="CreatePassword")
