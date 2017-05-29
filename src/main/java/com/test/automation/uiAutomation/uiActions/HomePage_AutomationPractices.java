@@ -8,7 +8,11 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import com.test.automation.uiAutomation.testBase.TestBase;
-
+/**
+ * 
+ * @author bsingh5
+ *
+ */
 
 public class HomePage_AutomationPractices extends TestBase {
 	

@@ -283,6 +283,12 @@ public class TestBase {
 		extent.endTest(test);
 		extent.flush();
 	}
+	
+	public WebElement waitForElement( WebDriver driver,WebElement element ,long timeOutInSeconds){
+		WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
+		wait.until(ExpectedConditions.elementToBeClickable(element));
+		return element;
+	}
 
   }
 

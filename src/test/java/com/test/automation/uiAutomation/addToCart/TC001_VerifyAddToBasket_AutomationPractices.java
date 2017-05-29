@@ -23,12 +23,12 @@ public class TC001_VerifyAddToBasket_AutomationPractices extends TestBase{
 	@Test
 	public void verifyAddToBasket() throws InterruptedException{
 		homePage = new HomePage_AutomationPractices(driver);
-		productDetails = new ProductDetails_AutomationPractices();
+		productDetails = new ProductDetails_AutomationPractices(driver);
 		
 		try {
 			homePage.mouseOver(homePage.women);
 			homePage.clickOnProduct("T-shirts");
-			productDetails.selectProduct("Faded Short Sleeve T-shirts");
+			productDetails.clickOnProduct("Faded Short Sleeve T-shirts");
 			productDetails.clickOnProceedTocheckout();
 		} 
 		
