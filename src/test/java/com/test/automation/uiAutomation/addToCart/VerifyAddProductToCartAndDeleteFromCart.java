@@ -1,8 +1,10 @@
 package com.test.automation.uiAutomation.addToCart;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.test.automation.uiAutomation.testBase.TestBase;
@@ -22,6 +24,10 @@ public class VerifyAddProductToCartAndDeleteFromCart extends TestBase {
 	
 	ShoppingCartPage_AutomationPractices shoppingCartPage;
 
+	@BeforeClass
+	public void setUp() throws IOException {
+		init();
+	}
 
 	@Test
 	public void assigment() throws InterruptedException {

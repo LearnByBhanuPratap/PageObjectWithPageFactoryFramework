@@ -62,7 +62,7 @@ public class TestBase {
      
      static{
     	 Calendar calendar = Calendar.getInstance();
-  		SimpleDateFormat formater = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
+  		 SimpleDateFormat formater = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
   		 extent = new ExtentReports(System.getProperty("user.dir") + "/src/main/java/com/test/automation/uiAutomation/report/test"+formater.format(calendar.getTime())+".html", false);
      }
      
@@ -82,7 +82,6 @@ public class TestBase {
      
      public void init() throws IOException{
     	  loadData();
-    	 
     	  String log4jConfPath = "log4j.properties";
     	  PropertyConfigurator.configure(log4jConfPath);
     	  System.out.println(OR.getProperty("browser"));

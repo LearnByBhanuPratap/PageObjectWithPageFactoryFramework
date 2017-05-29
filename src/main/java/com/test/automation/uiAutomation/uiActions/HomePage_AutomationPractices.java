@@ -16,6 +16,8 @@ import com.test.automation.uiAutomation.testBase.TestBase;
 
 public class HomePage_AutomationPractices extends TestBase {
 	
+	
+	WebDriver driver;
 	public final String tshirts = "T-shirts";
 	public final String blouses = "Blouses";
 	public final String casualDresses = "Casual Dresses";
@@ -38,6 +40,7 @@ public class HomePage_AutomationPractices extends TestBase {
 	WebElement submitButton;
 
 	public HomePage_AutomationPractices(WebDriver driver) {
+		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 
