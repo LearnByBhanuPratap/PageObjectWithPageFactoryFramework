@@ -3,6 +3,8 @@ package com.test.automation.uiAutomation.homepage;
 import java.io.IOException;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -22,10 +24,11 @@ public class TC004_VerifyLoginWithJavaScriptExecutator extends TestBase{
 	public void testLogin() {
 	homepage = new HomePage(driver);
 	homepage.switchToFrame();
-	driver.executeScript("arguments[0].click();", driver.findElement(By.xpath(".//*[@id='customer_login_link']")));
-    driver.executeScript("arguments[0].value=\"testhgjfjhfgdjfh@gmail.com\";", driver.findElement(By.xpath(".//*[@id='CustomerEmail']")));
-    driver.executeScript("arguments[0].value=\"testhgjfjhfgdjfh\";", driver.findElement(By.xpath(".//*[@id='CustomerPassword']")));
-    driver.executeScript("arguments[0].click();", driver.findElement(By.xpath(".//*[@id='customer_login']/p[1]/input")));
+	JavascriptExecutor js = (JavascriptExecutor) driver; 
+	js.executeScript("arguments[0].click();", driver.findElement(By.xpath(".//*[@id='customer_login_link']")));
+    js.executeScript("arguments[0].value=\"testhgjfjhfgdjfh@gmail.com\";", driver.findElement(By.xpath(".//*[@id='CustomerEmail']")));
+    js.executeScript("arguments[0].value=\"testhgjfjhfgdjfh\";", driver.findElement(By.xpath(".//*[@id='CustomerPassword']")));
+    js.executeScript("arguments[0].click();", driver.findElement(By.xpath(".//*[@id='customer_login']/p[1]/input")));
     
 	}
 
