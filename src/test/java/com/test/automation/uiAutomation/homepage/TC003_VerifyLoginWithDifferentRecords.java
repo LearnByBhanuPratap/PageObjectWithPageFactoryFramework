@@ -27,7 +27,7 @@ public class TC003_VerifyLoginWithDifferentRecords extends TestBase{
 	}
 	
 
-	@BeforeClass
+	//@BeforeClass
 	public void setUp() throws IOException {
      init();
      homepage = new HomePage(driver);
@@ -35,7 +35,7 @@ public class TC003_VerifyLoginWithDifferentRecords extends TestBase{
 
 	@Test(dataProvider="loginData")
 	public void verifyLoginWithDifferentRecords(String emailAddress, String loginPassword, String runMode) {
-		
+		homepage = new HomePage(driver);
 		if(runMode.equalsIgnoreCase("n")){
 			throw new SkipException("user marked this record as no run");
 		}

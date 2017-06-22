@@ -24,7 +24,7 @@ public class VerifyAddProductToCartAndDeleteFromCart extends TestBase {
 	
 	ShoppingCartPage_AutomationPractices shoppingCartPage;
 
-	@BeforeClass
+	//@BeforeClass
 	public void setUp() throws IOException {
 		init();
 	}

@@ -134,7 +134,7 @@ public class TestBase {
 		log.info("navigating to :-" + url);
 		driver.get(url);
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	public String[][] getData(String excelName, String sheetName) {
@@ -281,7 +281,7 @@ public class TestBase {
 	}
 
 	public void closeBrowser() {
-		driver.quit();
+		//driver.quit();
 		log.info("browser closed");
 		extent.endTest(test);
 		extent.flush();
@@ -293,28 +293,30 @@ public class TestBase {
 		return element;
 	}
 
-	@Parameters("browser")
-	@BeforeTest
-	public void launchapp(String browser) throws MalformedURLException {
+	//@Parameters("browser")
+	//@BeforeTest
+	public void launchapp(String browser) throws IOException {
 
 		if (System.getProperty("os.name").contains("Mac")) {
 			if (browser.equals("chrome")) {
-				System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/drivers/chromedriver");
+				//System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/drivers/chromedriver");
 				System.out.println(" Executing on CHROME");
 				DesiredCapabilities cap = DesiredCapabilities.chrome();
 				cap.setBrowserName("chrome");
-				String Node = "http://localhost:5555/wd/hub";
+				String Node = "http://localhost:5001/wd/hub";
 				driver = new RemoteWebDriver(new URL(Node), cap);
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				// Launch website
+				loadData();
 				getUrl(OR.getProperty("url"));
 			} else if (browser.equals("firefox")) {
-				System.setProperty("webdriver.firefox.marionette", System.getProperty("user.dir") + "/drivers/geckodriver");
+				//System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/drivers/geckodriver.exe");
 				System.out.println(" Executing on FireFox");
-				String Node = "http:// 172.16.123.130:5554/wd/hub";
+				String Node = "http://172.16.123.130:5000/wd/hub";
 				DesiredCapabilities cap = DesiredCapabilities.firefox();
 				cap.setBrowserName("firefox");
 				driver = new RemoteWebDriver(new URL(Node), cap);
+				loadData();
 				getUrl(OR.getProperty("url"));
 			} else if (browser.equalsIgnoreCase("ie")) {
 				System.out.println(" Executing on IE");
@@ -324,6 +326,7 @@ public class TestBase {
 				driver = new RemoteWebDriver(new URL(Node), cap);
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				// Launch website
+				loadData();
 				getUrl(OR.getProperty("url"));
 			} else {
 				throw new IllegalArgumentException("The Browser Type is Undefined");
@@ -340,15 +343,17 @@ public class TestBase {
 				driver = new RemoteWebDriver(new URL(Node), cap);
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				// Launch website
+				loadData();
 				getUrl(OR.getProperty("url"));
 			} else if (browser.equals("firefox")) {
 				System.out.println(System.getProperty("user.dir"));
 				System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/drivers/geckodriver.exe");
 				System.out.println(" Executing on FireFox");
-				String Node = "http:// 172.16.123.130:5554/wd/hub";
+				String Node = "http://172.16.123.130:5554/wd/hub";
 				DesiredCapabilities cap = DesiredCapabilities.firefox();
 				cap.setBrowserName("firefox");
 				driver = new RemoteWebDriver(new URL(Node), cap);
+				loadData();
 				getUrl(OR.getProperty("url"));
 			} else if (browser.equalsIgnoreCase("ie")) {
 				System.out.println(" Executing on IE");

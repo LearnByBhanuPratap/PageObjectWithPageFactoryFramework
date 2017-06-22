@@ -15,7 +15,7 @@ public class TC001_VerifyAddToBasket_AutomationPractices extends TestBase{
 	HomePage_AutomationPractices homePage;
 	ProductDetails_AutomationPractices productDetails;
 	
-	@BeforeClass
+	//@BeforeClass
 	public void setUp() throws IOException{
 		init();
 	}

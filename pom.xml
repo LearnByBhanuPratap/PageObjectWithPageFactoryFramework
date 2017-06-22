@@ -4,7 +4,7 @@
 
   <groupId>com.test.automation</groupId>
   <artifactId>uiAutomation</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.2</version>
   <packaging>jar</packaging>
 
   <name>uiAutomation</name>
@@ -19,7 +19,7 @@
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<version>3.3.1</version>
+			<version>3.0.1</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
 		<dependency>
@@ -48,10 +48,12 @@
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/com.relevantcodes/extentreports -->
-<dependency>
+           <dependency>
 			<groupId>com.relevantcodes</groupId>
 			<artifactId>extentreports</artifactId>
 			<version>2.40.2</version>
 		</dependency>
   </dependencies>
+  
+  
 </project>
