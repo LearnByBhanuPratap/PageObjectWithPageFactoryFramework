@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.apache.log4j.Logger;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.test.automation.uiAutomation.testBase.TestBase;
@@ -15,7 +16,7 @@ public class TC001_VerifyLoginWithInvalidCredentailsToAutoMationPractices extend
 
 	HomePage_AutomationPractices homepage;
 	
-	//@BeforeTest
+	@BeforeClass
 	public void setUp() throws IOException{
      init();
 

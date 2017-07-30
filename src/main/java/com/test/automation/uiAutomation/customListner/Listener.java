@@ -22,7 +22,6 @@ import com.test.automation.uiAutomation.testBase.TestBase;
  */
 public class Listener extends TestBase implements ITestListener{
 
-	WebDriver driver;
    
 	public void onFinish(ITestContext arg0) {
 		Reporter.log("Test is finished:" + arg0.getName());

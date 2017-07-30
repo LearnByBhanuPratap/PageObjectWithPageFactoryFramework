@@ -27,7 +27,7 @@ public class TC003_VerifyLoginWithDifferentRecords extends TestBase{
 	}
 	
 
-	//@BeforeClass
+	@BeforeClass
 	public void setUp() throws IOException {
      init();
      homepage = new HomePage(driver);

@@ -13,10 +13,10 @@ import com.test.automation.uiAutomation.uiActions.ProductDetailsPage;
 public class TC001_VerifyAaddToCart extends TestBase{
 	HomePage homepage;
 	ProductDetailsPage productDetailsPage;
+	
 	@BeforeClass
 	public void setUp() throws IOException {
-      init();
-      //org.openqa.selenium.InvalidSelectorException: 
+      init(); 
 	}
 
 	@Test

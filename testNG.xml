@@ -4,42 +4,24 @@
 <suite name="Regression Suite">
 
 <listeners>
-<!--  <listener class-name="com.test.automation.uiAutomation.customListner.Listener"></listener>  -->
-<!-- <listener class-name="com.test.automation.uiAutomation.customListner.RetryListener"></listener> -->
+<!-- <listener class-name="com.test.automation.uiAutomation.customListner.Listener"></listener>  -->
+<listener class-name="com.test.automation.uiAutomation.customListner.RetryListener"></listener> 
 </listeners>
 
-<!-- <test name="HomePageTest">
+<test name="HomePageTest">
 <classes>
 <class name="com.test.automation.uiAutomation.homepage.TC002_VerifyRegistration"></class>
 <class name="com.test.automation.uiAutomation.homepage.TC003_VerifyLoginWithDifferentRecords"></class>
 <class name="com.test.automation.uiAutomation.addToCart.TC001_VerifyAaddToCart"></class>
 <class name="com.test.automation.uiAutomation.addToCart.TC002_VerifyFacebookLink"></class>
 </classes>
-</test> -->
+</test>
 
-<!-- <test name="AddToCartTest">
+<test name="AddToCartTest">
 <classes>
 <class name="com.test.automation.uiAutomation.addToCart.TC001_VerifyAaddToCart"></class>
 <class name="com.test.automation.uiAutomation.addToCart.TC002_VerifyFacebookLink"></class>
 </classes>
-</test> -->
-
-<test name="FirefoxTest" >
-   <parameter name="browser" value="firefox" />
-      <classes>
-      <!--  <class name="com.test.automation.uiAutomation.addToCart.TC001_VerifyAddToBasket_AutomationPractices"></class> -->
-       <class name="com.test.automation.uiAutomation.addToCart.VerifyAddProductToCartAndDeleteFromCart"></class>
-
-      </classes>
-   </test>
-
- <test name="ChromeTest">
-   <parameter name="browser" value="chrome" />
-      <classes>
-       <!-- <class name="com.test.automation.uiAutomation.addToCart.TC001_VerifyAddToBasket_AutomationPractices"></class> -->
-       <class name="com.test.automation.uiAutomation.addToCart.VerifyAddProductToCartAndDeleteFromCart"></class>
-    
-      </classes>
-   </test> 
+</test>
 
 </suite>
